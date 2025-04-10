@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shree's Cake Library</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #690000, #8B0000, #A52A2A);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .main-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .frame {
+            position: relative;
+            padding: 60px 40px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ornate-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            z-index: 1;
+        }
+        
+        .ornate-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            z-index: 2;
+        }
+        
+        .ornate-corner.top-left {
+            top: -5px;
+            left: -5px;
+            border-top: 5px solid #FFD700;
+            border-left: 5px solid #FFD700;
+            border-top-left-radius: 15px;
+        }
+        
+        .ornate-corner.top-right {
+            top: -5px;
+            right: -5px;
+            border-top: 5px solid #FFD700;
+            border-right: 5px solid #FFD700;
+            border-top-right-radius: 15px;
+        }
+        
+        .ornate-corner.bottom-left {
+            bottom: -5px;
+            left: -5px;
+            border-bottom: 5px solid #FFD700;
+            border-left: 5px solid #FFD700;
+            border-bottom-left-radius: 15px;
+        }
+        
+        .ornate-corner.bottom-right {
+            bottom: -5px;
+            right: -5px;
+            border-bottom: 5px solid #FFD700;
+            border-right: 5px solid #FFD700;
+            border-bottom-right-radius: 15px;
+        }
+        
+        .ornate-decoration {
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'serif';
+            color: #FFD700;
+            font-size: 24px;
+            z-index: 2;
+        }
+        
+        .ornate-decoration.top {
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .ornate-decoration.bottom {
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+        }
+        
+        .ornate-decoration.left {
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        .ornate-decoration.right {
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+        }
+        
+        .content {
+            position: relative;
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .welcome {
+            font-family: 'Great Vibes', cursive;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .title {
+            font-family: 'Playfair Display', serif;
+            color: #FFD700;
+            font-size: 4.5rem;
+            font-weight: 700;
+            text-shadow: 
+                0 0 10px rgba(139, 0, 0, 0.8),
+                2px 2px 4px rgba(0, 0, 0, 0.7),
+                -1px -1px 1px rgba(255, 215, 0, 0.3);
+            margin: 10px 0;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            font-size: 1.5rem;
+            margin-top: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .shine-effect {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.1) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            animation: shine 6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+        
+        @keyframes shine {
+            0% { left: -100px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { left: 100%; opacity: 1; }
+            51% { opacity: 0; }
+            100% { left: -100px; opacity: 0; }
+        }
+        
+        .decorative-element {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 215, 0, 0.6);
+            z-index: 1;
+            animation: float 5s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        
+        .decorative-element:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .decorative-element:nth-child(2) { top: 25%; right: 15%; animation-delay: 0.5s; }
+        .decorative-element:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 1s; }
+        .decorative-element:nth-child(4) { bottom: 30%; right: 10%; animation-delay: 1.5s; }
+        .decorative-element:nth-child(5) { top: 50%; left: 5%; animation-delay: 2s; }
+        .decorative-element:nth-child(6) { bottom: 10%; right: 5%; animation-delay: 2.5s; }
+        
+        .flourish {
+            display: inline-block;
+            margin: 0 15px;
+            color: rgba(255, 215, 0, 0.7);
+            font-size: 1.5rem;
+        }
+        
+        .divider {
+            width: 60%;
+            margin: 20px auto;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                rgba(255,215,0,0), 
+                rgba(255,215,0,0.7) 50%,
+                rgba(255,215,0,0));
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="frame">
+            <div class="ornate-border"></div>
+            <div class="ornate-corner top-left"></div>
+            <div class="ornate-corner top-right"></div>
+            <div class="ornate-corner bottom-left"></div>
+            <div class="ornate-corner bottom-right"></div>
+            
+            <div class="ornate-decoration top">❦</div>
+            <div class="ornate-decoration bottom">❦</div>
+            <div class="ornate-decoration left">❦</div>
+            <div class="ornate-decoration right">❦</div>
+            
+            <div class="shine-effect"></div>
+            
+            <div class="decorative-element">✧</div>
+            <div class="decorative-element">✦</div>
+            <div class="decorative-element">❀</div>
+            <div class="decorative-element">✧</div>
+            <div class="decorative-element">✦</div>
+            <div class="decorative-element">❀</div>
+            
+            <div class="content">
+                <div class="welcome">Welcome to</div>
+                <div class="divider"></div>
+                <h1 class="title">Shree's Cake Library</h1>
+                <div class="divider"></div>
+                <div class="tagline"><span class="flourish">✦</span>Artisanal Delights<span class="flourish">✦</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

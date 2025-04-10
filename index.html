@@ -65,7 +65,7 @@
         }
 
         .nav-links ul li a:hover {
-            color: rgb(38, 36, 36);
+            color: rgb(63, 173, 242);
         }
 
         .nav-links ul li::after {
@@ -455,14 +455,120 @@
                 font-size: 1em;
             }
         }
+        /* Name Shree Cake Library */
+        .name {
+            font-size: 1.6rem;
+            font-weight: normal;
+            color: #fbff00;
+            text-shadow: 
+                0 0 8px rgba(251, 188, 62, 0.8),
+                2px 6px 1px rgba(0, 0, 0, 0.6);
+           
+            line-height: 1.2;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .decorative-border {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            z-index: 1;
+        }
+        
+        .decorative-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #ffffff;
+            z-index: 1;
+        }
+        
+        .top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0.053) 0%, 
+                rgba(255,255,255,0.2) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            animation: shine 3s infinite linear;
+            z-index: 3;
+        }
+        
+        @keyframes shine {
+            0% { left: -100px; }
+            100% { left: 100%; }
+        }
+        /*  */
+        .fade-in {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            color: #f7fc65;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
     </style>
 </head>
 
 <body>
     <section class="header" id="Home">
         <nav>
-            <p style="color: #f1ee20; font-size: 30px; 
-             font-family: 'Merienda One', cursive;">Shree's Cake Library</p>
+            <div class="container">
+                <div class="decorative-border"></div>
+                <div class="decorative-corner top-left"></div>
+                <div class="decorative-corner top-right"></div>
+                <div class="decorative-corner bottom-left"></div>
+                <div class="decorative-corner bottom-right"></div>
+                
+                <div class="shine"></div>
+                
+                <a href="Name.html" style="text-decoration: none;" target="_self"><h1 class="name">Shree's Cake Library</h1></a>
+            </div>
+
             <a href=""><img src="" /></a>
             <div class="nav-links" id="navLinks">
                 <i class="fa-solid fa-times" onclick="hideMenu()"></i>
@@ -479,8 +585,9 @@
         </nav>
 
         <div class="text-box">
-            <h1 style="font-size: 32px; color: rgb(254, 235, 235); font-family: cursive;">Welcome to Shree's Cake Library,
-            </h1>
+            <div class="container">
+                <div class="fade-in">Welcome to Shree's Cake Library</div>
+            </div>
             <br>
             <a href="More.html" class="hero-btn" style="font-size: 15px;"> Know More</a>
         </div>
@@ -619,24 +726,27 @@
 
         <div class="row">
             <div class="facilities-col">
-                <img src="Images/One.JPEG"/>
+                <img src="Images/One.JPEG" />
                 <h3>This is The Classic Library in Katol</h3>
                 <p style="margin-top: -3%;">
-                    It stands located at Shrees Cake Library, Nabira Colleage, Dhantoli, Katol-441302. Nabira Colleage is a prominent landmark in the area and this establishment ,
+                    It stands located at Shrees Cake Library, Nabira Colleage, Dhantoli, Katol-441302. Nabira Colleage
+                    is a prominent landmark in the area and this establishment ,
                 </p>
             </div>
             <div class="facilities-col">
                 <img src="Images/Three.JPEG" />
                 <h3>Best Cake in shree's Cake Library</h3>
                 <p style="margin-top: -4%;">
-                    where each cake tells a story of sweetness and joy. Our handcrafted cakes are made with love, offering a wide range of flavors and designs for every special occasion.
+                    where each cake tells a story of sweetness and joy. Our handcrafted cakes are made with love,
+                    offering a wide range of flavors and designs for every special occasion.
                 </p>
             </div>
             <div class="facilities-col">
                 <img src="Images/Five.JPEG" />
                 <h3>Bekery For Celebreters</h3>
                 <p style="margin-top: -4%;">
-                    Welcome to Bakery for Celebreters, where we specialize in crafting delightful treats that elevate your celebrations. From stunning custom cakes to delicious pastries .
+                    Welcome to Bakery for Celebreters, where we specialize in crafting delightful treats that elevate
+                    your celebrations. From stunning custom cakes to delicious pastries .
                 </p>
             </div>
         </div>
@@ -691,14 +801,17 @@
         <section class="cta" id="contact">
             <h1>Shree's Cake Library<br>
                 Welcome to My Contact Us ,</h1>
-            <a href="https://www.zomato.com/katol/shrees-cake-library-katol-locality/reviews" class="hero-btn">CONTACT US</a>
+            <a href="https://www.zomato.com/katol/shrees-cake-library-katol-locality/reviews" class="hero-btn">CONTACT
+                US</a>
         </section>
 
         <!------ Footer ------->
 
         <section class="Footer" id="About">
             <h4>About Us</h4>
-            <p>It stands located at Shrees Cake Library, Nabira Colleage, Dhantoli, Katol-441302. Nabira Colleage is <br> a prominent landmark in the area and this establishment is</p>
+            <p>It stands located at Shrees Cake Library, Nabira Colleage, Dhantoli, Katol-441302. Nabira Colleage is
+                <br> a prominent landmark in the area and this establishment is
+            </p>
             <div class="icons">
                 <i class="fa-brands fa-facebook"></i>
                 <i class="fa-brands fa-twitter"></i>

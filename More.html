@@ -1,501 +1,555 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cakes</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <title>Bakeries in Nagpur - Zomato</title>
     <style>
-        :root {
-            --primary-color: #6b8e23;
-            --secondary-color: #f4f4f4;
-            --accent-color: #ff6b6b;
-        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            text-decoration: none;
-
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            background-color: #f8f8f8;
+            color: #333;
         }
-
+        
         header {
-            background-color: #854d12;
-            color: white;
-            padding: 1rem;
-        }
-
-        .top-bar {
+            padding: 12px 16px;
+            background-color: white;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .search-bar {
-            flex-grow: 1;
-            margin: 0 1rem;
-        }
-
-        .search-bar input {
-            width: 80%;
-            padding: 0.8rem;    
-        }
-
-        nav ul {
-            list-style-type: none;
-            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
             flex-wrap: wrap;
         }
-
-        nav ul li {
-            margin-right: 1rem;
+        
+        .logo img {
+            height: 28px;
         }
-
-        nav ul li a {
-            color: rgb(0, 0, 0);
-            text-decoration: none;
-        }
-
-        main {
+        
+        .search-container {
             display: flex;
-            padding: 1rem;
-        }
-
-        .filters {
-            width: 200px;
-            margin-right: 1rem;
-
-        }
-
-        .cake-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            flex-grow: 1;
-        }
-
-        .cake-item {
-            border: 1px solid #ddd;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .cake-item img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: column;
-            }
-
-            .search-bar {
-                margin: 1rem 0;
-                width: 100%;
-            }
-
-            nav ul {
-                flex-direction: column;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-
-            main {
-                flex-direction: column;
-            }
-
-            .filters {
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-        }
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            position: relative;
-            top: 0;
-            z-index: 1000;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            flex: 1;
+            max-width: 700px;
+            margin: 0 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 0 10px;
+            background-color: white;
         }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        
+        .location-selector {
+            display: flex;
+            align-items: center;
+            border-right: 1px solid #e8e8e8;
+            padding-right: 10px;
+            margin-right: 10px;
+            color: #333;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
         }
+        
+        .location-selector i {
+            color: #e23744;
+            margin-right: 5px;
+            flex-shrink: 0;
+        }
+        
+        .location-selector span.location-text {
+            margin-right: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
         .search-bar {
-            flex-grow: 1;
-            margin: 0 1rem;
-            position: relative;
-        }
-        .search-bar input {
-            width: 100%;
-            padding: 0.7rem;
-            border-radius: 20px;
+            flex: 1;
             border: none;
             outline: none;
+            padding: 12px;
+            font-size: 14px;
+            width: 100%;
         }
-        .search-bar i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-color);
-        }
-        .user-actions {
+        
+        .user-profile {
             display: flex;
             align-items: center;
-        }
-        .user-actions span {
-            margin-left: 1rem;
             cursor: pointer;
         }
-        nav ul {
-            list-style-type: none;
-            display: flex;
-            flex-wrap: wrap;
+        
+        .user-profile img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-right: 8px;
         }
-        nav ul li {
-            margin-right: 1rem;
+        
+        .breadcrumb {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #696969;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
         }
-        nav ul li a {
-            color: white;
+        
+        .breadcrumb::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .breadcrumb a {
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: #696969;
+            margin: 0 5px;
         }
-        nav ul li a:hover {
-            color: var(--accent-color);
+        
+        .breadcrumb a:first-child {
+            margin-left: 0;
+        }
+        
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+        
+        .tab-container {
+            display: flex;
+            padding: 0 16px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .tab-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .tab {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            margin-right: 12px;
+            cursor: pointer;
+            border-radius: 50px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .tab.active {
+            color: #e23744;
+            position: relative;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e23744;
+        }
+        
+        .tab i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .filter-container {
+            display: flex;
+            padding: 0 16px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .filter-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .filter {
+            padding: 8px 15px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            margin-right: 10px;
+            font-size: 14px;
+            background-color: white;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .filter.active {
+            background-color: #e23744;
+            color: white;
+            border-color: #e23744;
+        }
+        
+        .filter i {
+            margin-right: 5px;
+        }
+        
+        .banner {
+            margin: 0 16px 24px 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 240px;
+            background-color: #1c1c1c;
+            color: white;
+        }
+        
+        .banner-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 24px;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        .banner-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .banner h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .banner h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .banner p {
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        
+        .banner-btn {
+            background-color: #e23744;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .page-title {
+            padding: 0 16px;
+            margin-bottom: 16px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            padding: 0 16px;
+        }
+        
+        .restaurant-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+        
+        .restaurant-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .location-icon {
+            color: #e23744;
+            margin-right: 5px;
+            flex-shrink: 0;
+        }
+        
+        .dropdown-icon {
+            font-size: 12px;
+            margin-left: 5px;
+            flex-shrink: 0;
+        }
+        
+        .close-icon {
+            margin-left: 5px;
+            flex-shrink: 0;
+        }
+        
+        .number-badge {
+            background-color: #e23744;
+            color: white;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 12px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .search-container {
+                order: 3;
+                margin: 10px 0 0 0;
+                width: 100%;
+                max-width: none;
+            }
+            
+            header {
+                padding: 10px;
+            }
+            
+            .banner h1 {
+                font-size: 36px;
+            }
+            
+            .banner h2 {
+                font-size: 20px;
+            }
+            
+            .banner-btn {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
+            
+            .restaurant-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .user-profile span {
+                display: none;
+            }
+            
+            .banner {
+                height: 200px;
+            }
+            
+            .banner-content {
+                padding: 16px;
+                width: 100%;
+                background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            }
+            
+            .banner-image {
+                width: 100%;
+                opacity: 0.8;
+            }
+            
+            .banner h1 {
+                font-size: 28px;
+            }
+            
+            .banner h2 {
+                font-size: 18px;
+            }
+            
+            .banner p {
+                font-size: 12px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+            }
+            
+            .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-selector {
+                max-width: 120px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .tab {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .filter {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .location-selector {
+                max-width: 100px;
+            }
         }
     </style>
 </head>
-
 <body>
+    <!-- Header -->
     <header>
-        <div class="top-bar">
-            <div class="logo">Shree Cakes Library</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search cakes, gifts, etc.">
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="user-actions">
-                <span><i class="fas fa-shopping-cart"></i> Cart</span>
-                <span><i class="fas fa-user"></i> Login</span>
-            </div>
+        <div class="logo">
+            <h2>Shree Cake Library</h2>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#"><i class="fas fa-birthday-cake"></i> Birthday</a></li>
-                <li><a href="#"><i class="fas fa-heart"></i> Anniversary</a></li>
-                <li><a href="#"><i class="fas fa-list"></i> All Cakes</a></li>
-                <li><a href="#"><i class="fas fa-gift"></i> Personalized</a></li>
-                <li><a href="#"><i class="fas fa-calendar-alt"></i> Occasions</a></li>
-            </ul>
-        </nav>
+        <div class="user-profile">
+<!-- <span class="dropdown-icon">▼</span> -->
+        </div>
+        <div class="search-container">
+            <div class="location-selector">
+                <span class="location-icon">📍</span>
+                <span class="location-text">Katol, Maharashtra 441302</span>
+                <span class="dropdown-icon">▼</span>
+            </div>
+            <input type="text" class="search-bar" placeholder="Search for restaurant, cuisine or a dish">
+        </div>
     </header>
-    <main>
-        <aside class="filters">
-            <h3>Filters</h3>
-            <nav>
-                <li ><a href="" style="color: #1f1e1e;">Birthday</a></li>
-                <li><a href="" style="color: #1f1e1e;">Anniversary</a></li>
-                <li><a href="" style="color: #1f1e1e;">Cakes</a></li>
-                <li><a href="" style="color: #1f1e1e;">Personalized</a></li>
-                <li><a href="" style="color: #1f1e1e;">Occasions</a></li>
-                <li><a href="" style="color: #1f1e1e;">Birthday</a></li>
-                <li><a href="" style="color: #1f1e1e;">Anniversary</a></li>
-                <li><a href="" style="color: #1f1e1e;">Cakes</a></li>
-                <li><a href="" style="color: #1f1e1e;">Personalized</a></li>
-                <li><a href="" style="color: #1f1e1e;">Occasions</a></li>
-            </nav>
-        </aside>
-        <section class="cake-grid">
-            <div class="cake-item">
-                <img src="https://kreamz.in/wp-content/uploads/2023/12/BLACK-FOREST-RECTANGLE-CAKE.webp"
-                    alt="Chocolate Truffle Cake">
-                <h3>Black Forest Rectangle Cake</h3>
-                <p>₹325</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://www.giftmyemotions.com/image/cache/floralnation/amazone/0148-800x800.jpg"
-                    alt="Fruit Overload Cake">
-                <h3>Eggless Black Forest Cake Half Kg</h3>
-                <p>₹749</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94560.jpeg?dpr=1&w=500"
-                    alt="Black Forest Cake">
-                <h3>Butterscotch Flavorsome Cake</h3>
-                <p>₹589</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <!-- Add more cake items as needed -->
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94610.jpeg?dpr=1&w=400"
-                    alt="Chocolate Truffle Cake">
-                <h3>Delicious Rasmalai Cake</h3>
-                <p>₹849</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/8/36065.jpeg?dpr=1&w=400"
-                    alt="Fruit Overload Cake">
-                <h3>Chocolate Birthday Cake</h3>
-                <p>₹579</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/8/35891.jpeg?dpr=1&w=400"
-                    alt="Black Forest Cake">
-                <h3>Birthday Butterscotch Cake</h3>
-                <p>₹575</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94562.jpeg?dpr=1&w=400"
-                    alt="Chocolate Truffle Cake">
-                <h3>Delicious Pineapple Cake</h3>
-                <p>₹599</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2023/3/83233.jpeg?dpr=1&w=400"
-                    alt="Fruit Overload Cake">
-                <h3>Delicious Black Forest Cake</h3>
-                <p>₹549</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94572.jpeg?dpr=1&w=400"
-                    alt="Black Forest Cake">
-                <h3>Frosting Red Velvet Cake</h3>
-                <p>₹729</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/4/95067.jpeg?dpr=1&w=400"
-                    alt="Chocolate Truffle Cake">
-                <h3>Rich Butterscotch Birthday Cake</h3>
-                <p>₹629</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94564.jpeg?dpr=1&w=400"
-                    alt="Fruit Overload Cake">
-                <h3>Marble Crunch Cake</h3>
-                <p>₹699</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94576.jpeg?dpr=1&w=400"
-                    alt="Black Forest Cake">
-                <h3>Scrumptious Red Velvet Cake</h3>
-                <p>₹799</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94568.jpeg?dpr=1&w=400"
-                    alt="Chocolate Truffle Cake">
-                <h3>Chocolate Drizzled Cake</h3>
-                <p>₹649</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94570.jpeg?dpr=1&w=400"
-                    alt="Fruit Overload Cake">
-                <h3>Black Forest Cake</h3>
-                <p>₹579</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2022/8/72487.jpeg?dpr=1&w=400"
-                    alt="Black Forest Cake">
-                <h3>Delicious Pineapple Cake</h3>
-                <p>₹529</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/6/33724.jpeg?dpr=1&w=400"
-                    alt="Chocolate Truffle Cake">
-                <h3>Birthday Chocolate cake</h3>
-                <p>₹669</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2022/12/80403.jpeg?dpr=1&w=400"
-                    alt="Fruit Overload Cake">
-                <h3>Dry Fruits Loaded Vanilla Cake</h3>
-                <p>₹799</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/8/38832.jpeg?dpr=1&w=400"
-                    alt="Black Forest Cake">
-                <h3>Delicious Caramel Cake</h3>
-                <p>₹649</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2022/9/73555.jpeg?dpr=1&w=400"
-                    alt="Chocolate Truffle Cake">
-                <h3>Drizzle Blueberry Cake</h3>
-                <p>₹629</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94577.jpeg?dpr=1&w=400"
-                    alt="Fruit Overload Cake">
-                <h3>Oreo Fantasy Cake</h3>
-                <p>₹799</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/8/41862.jpeg?dpr=1&w=400"
-                    alt="Black Forest Cake">
-                <h3>Motu Patlu Luscious Cake</h3>
-                <p>₹849</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/8/40572.jpeg?dpr=1&w=400"
-                    alt="Chocolate Truffle Cake">
-                <h3>Extravagant Blueberry Cake</h3>
-                <p>₹699</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/6/26565.jpeg?dpr=1&w=400"
-                    alt="Fruit Overload Cake">
-                <h3>Princess Cake</h3>
-                <p>₹925</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/8/38870.jpeg?dpr=1&w=400"
-                    alt="Black Forest Cake">
-                <h3>Cricket Pitch Fondant cake</h3>
-                <p>₹799</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2021/9/53476.jpeg?dpr=1&w=400" alt="Chocolate Truffle Cake">
-                <h3>Chocolate Truffle Cake</h3>
-                <p>₹599</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/6/34311.jpeg?dpr=1&w=400" alt="Fruit Overload Cake">
-                <h3>Fruit Overload Cake</h3>
-                <p>₹725</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2023/8/88014.jpeg?dpr=1&w=400" alt="Black Forest Cake">
-                <h3>Black Forest Cake</h3>
-                <p>₹549</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2022/9/73478.jpeg?dpr=1&w=400" alt="Chocolate Truffle Cake">
-                <h3>Chocolate Truffle Cake</h3>
-                <p>₹599</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94611.jpeg?dpr=1&w=400" alt="Fruit Overload Cake">
-                <h3>Fruit Overload Cake</h3>
-                <p>₹725</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94575.jpeg?dpr=1&w=400" alt="Black Forest Cake">
-                <h3>Black Forest Cake</h3>
-                <p>₹549</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/6/33704.jpeg?dpr=1&w=400" alt="Chocolate Truffle Cake">
-                <h3>Chocolate Truffle Cake</h3>
-                <p>₹599</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2023/10/90487.jpeg?dpr=1&w=400" alt="Fruit Overload Cake">
-                <h3>Fruit Overload Cake</h3>
-                <p>₹725</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/6/31438.jpeg?dpr=1&w=400" alt="Black Forest Cake">
-                <h3>Black Forest Cake</h3>
-                <p>₹549</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94573.jpeg?dpr=1&w=400" alt="Chocolate Truffle Cake">
-                <h3>Chocolate Truffle Cake</h3>
-                <p>₹599</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2014/8/35891.jpeg?dpr=1&w=400" alt="Fruit Overload Cake">
-                <h3>Fruit Overload Cake</h3>
-                <p>₹725</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94612.jpeg?dpr=1&w=400" alt="Black Forest Cake">
-                <h3>Black Forest Cake</h3>
-                <p>₹549</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2023/10/90493.jpeg?dpr=1&w=400" alt="Chocolate Truffle Cake">
-                <h3>Chocolate Truffle Cake</h3>
-                <p>₹599</p>
-                <p>Rating: 4.8★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2022/10/75605.jpeg?dpr=1&w=400" alt="Fruit Overload Cake">
-                <h3>Fruit Overload Cake</h3>
-                <p>₹725</p>
-                <p>Rating: 5.0★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/1/93188.jpeg?dpr=1&w=400" alt="Black Forest Cake">
-                <h3>Black Forest Cake</h3>
-                <p>₹549</p>
-                <p>Rating: 4.9★</p>
-            </div>
-            <div class="cake-item">
-                <img src="https://assets.winni.in/product/primary/2024/3/94578.jpeg?dpr=1&w=400" alt="Black Forest Cake">
-                <h3>Black Forest Cake</h3>
-                <p>₹549</p>
-                <p>Rating: 4.9★</p>
-            </div>
-        </section>
-    </main>
-</body>
 
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="#">Home</a> /
+        <a href="#">India</a> /
+        <a href="#">Katol</a> /
+        <span>Bakeries</span>
+    </div>
+
+    <!-- Tabs -->
+    <!-- <div class="tab-container">
+        <div class="tab active">
+            <span>🍽️</span>
+            <span>Dining Out</span>
+        </div>
+        <div class="tab">
+            <span>🛵</span>
+            <span>Delivery</span>
+        </div>
+        <div class="tab">
+            <span>🍸</span>
+            <span>Nightlife</span>
+        </div>
+    </div> -->
+
+    <!-- Filters -->
+    <div class="filter-container">
+        <div class="filter">
+            <div class="number-badge">1</div>
+            <span>Filters</span>
+        </div>
+        <div class="filter active">
+            <span>Bakery</span>
+            <span class="close-icon">✕</span>
+        </div>
+        <div class="filter">
+            <span>Offers</span>
+        </div>
+        <div class="filter">
+            <span>Rating: 4.5+</span>
+        </div>
+        <div class="filter">
+            <span>Pet Friendly</span>
+        </div>
+        <div class="filter">
+            <span>Outdoor Seating</span>
+        </div>
+        <div class="filter">
+            <span>Serves Alcohol</span>
+        </div>
+        <div class="filter">
+            <span>Open Now</span>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <!-- <div class="banner">
+       
+        <img src="" alt="Food" class="banner-image">
+    </div> -->
+
+    <!-- Listings -->
+    <h1 class="page-title">Bakeries in Katol</h1>
+    <div class="restaurant-grid">
+        <div class="restaurant-card">
+            <img src="https://assets.winni.in/product/primary/2023/3/83221.jpeg?dpr=2&w=220"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://dy9wzeeht8myy.cloudfront.net/images/catalog/flowers/CH10A-350x350.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://gurgaonbakers.com/wp-content/uploads/2020/11/large-chocolaty-birthday-cake.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://cdn-efokf.nitrocdn.com/ZQRozOsOErnVmjhbXawnlhMkSGhlXiWW/assets/images/optimized/rev-8fa7e32/www.doorstepcake.com/wp-content/uploads/2022/05/Doremon-Yummy-Birthday-Cake-510x510-1.jpg" class="restaurant-image">
+        </div>
+    </div>
+    <br>
+    <!-- second row -->
+    <div class="restaurant-grid">
+        <div class="restaurant-card">
+            <img src="https://handletheheat.com/wp-content/uploads/2015/03/Best-Birthday-Cake-with-milk-chocolate-buttercream-SQUARE.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://recipesblob.oetker.ca/assets/b75297c3976e41a39cf3e74376d1459a/750x910/birthday-cake-11.webp"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://kekmart.com/wp-content/uploads/2021/10/Black-Forest.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://i.redd.it/cb94n89dipl61.jpg" class="restaurant-image">
+        </div>
+    </div>
+    <!-- third row -->
+    <div class="restaurant-grid">
+        <div class="restaurant-card">
+            <img src="https://magicbakers.in/wp-content/uploads/2024/02/Happy-birthday-cake-1.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://www.theflowerspoint.com/data/cache/images/2022/august/sweet-chocolate-birthday-cake-441x441.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://www.flavoursguru.com/image/cache/catalog/catimg/primary1/FGPACAK167-260x260.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://cdn.shopify.com/s/files/1/0684/7433/9577/products/happy-birthday-delicate-black-forest-cake-half-kg_1_16fc9635-4279-499f-ad17-25de1956caa6.jpg?v=1709931370" class="restaurant-image">
+        </div>
+    </div>
+    <!-- fourth -->
+    <div class="restaurant-grid">
+        <div class="restaurant-card">
+            <img src="https://www.giftsmyntra.com/wp-content/uploads/2021/01/hamp49.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://img.clevup.in/52988/1632314772785_SKU-0263_0.jpg?format=webp"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://cdn.igp.com/f_auto,q_auto,t_prodl/products/p-delicious-chocolate-personalised-photo-cake-half-kg--108300-m.jpg"  class="restaurant-image">
+        </div>
+        <div class="restaurant-card">
+            <img src="https://i.pinimg.com/474x/03/57/86/03578678dc7e30dc78305e9c8279dec0.jpg" class="restaurant-image">
+        </div>
+    </div>
+     
+</body>
 </html>
